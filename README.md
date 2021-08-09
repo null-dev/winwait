@@ -7,4 +7,4 @@ Specify a list of process names and winwait will run a command once any process 
 winwait location-of-config.conf
 ```
 
-See example.conf for an example configuration file.
+See [example.conf](https://github.com/null-dev/winwait/blob/master/example.conf) for an example configuration file.
