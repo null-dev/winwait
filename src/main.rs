@@ -12,6 +12,7 @@ use std::ffi::{OsString, OsStr};
 use std::path::Component::Normal;
 use std::process::Command;
 use std::fs::OpenOptions;
+use hocon::HoconLoader;
 
 #[derive(Deserialize, Debug)]
 struct Config {
@@ -29,8 +30,8 @@ fn main() {
     let config: Config;
     if let Some(str) = args.next() {
         let path = Path::new(&str);
-        if let Ok(file) = OpenOptions::new().read(true).open(path) {
-            match serde_json::from_reader(file) {
+        if let Ok(file) = HoconLoader::new().load_file(path) {
+            match file.resolve() {
                 Ok(res) => config = res,
                 Err(e) => {
                     println!("Could not load config file: {:?}", e);
